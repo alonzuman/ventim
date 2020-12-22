@@ -1,0 +1,12 @@
+.signIn {
+  width: 100%;
+  max-width: 512px;
+}
+
+.signIn .MuiFormControl-root {
+  margin-bottom: 16px;
+}
+
+.signIn button {
+  margin-bottom: 64px;
+}

@@ -1,25 +1,22 @@
-import logo from './logo.svg';
+import { CircularProgress } from '@material-ui/core';
+import React from 'react';
 import './App.css';
+import useAuth from './hooks/useAuth';
+import Auth from './navigation/Auth';
+import ProtectedRouter from './navigation/ProtectedRouter';
+import ProfileProvider from './providers/ProfileProvider';
 
 function App() {
+  const { user, isLoading } = useAuth()
+
+  if (isLoading) return <CircularProgress />
+  if (!user) return <Auth />
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    <ProfileProvider>
+      <ProtectedRouter />
+    </ProfileProvider>
+  )
 }
 
 export default App;

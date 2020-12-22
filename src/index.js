@@ -3,10 +3,16 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import AuthProvider from './providers/AuthProvider';
+import ProfileProvider from './providers/ProfileProvider';
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <AuthProvider>
+      <ProfileProvider>
+        <App />
+      </ProfileProvider>
+    </AuthProvider>
   </React.StrictMode>,
   document.getElementById('root')
 );
