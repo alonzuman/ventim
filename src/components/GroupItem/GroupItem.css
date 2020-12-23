@@ -3,6 +3,11 @@
 }
 
 .groupItem__avatar {
-  height: 32px;
-  width: 32px;
+  height: 32px!important;
+  width: 32px!important;
+}
+
+.groupItem__link {
+  color: inherit;
+  text-decoration: inherit;
 }

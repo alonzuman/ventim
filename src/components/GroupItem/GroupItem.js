@@ -2,27 +2,28 @@ import { Avatar, Divider, ListItem, ListItemAvatar, ListItemText } from '@materi
 import { AvatarGroup } from '@material-ui/lab'
 import './GroupItem.css';
 import React from 'react'
+import { Link } from 'react-router-dom';
 
 const GroupItem = ({ group }) => {
   return (
-    <>
+    <Link className='groupItem__link' to={`/groups/${group.id}`}>
       <ListItem button alignItems='flex-start'>
         <ListItemAvatar>
           <Avatar src={group.image} />
         </ListItemAvatar>
         <ListItemText
-          primary={group.name}
+          primary={group.title}
           secondary={(
             <>
               {group.description}
               <AvatarGroup className='groupItem__avatarGroup'>
-                {group.users.map(user => <Avatar className='groupItem__avatar' src={user.avatar} />)}
+                {group.users.map(user => <Avatar className='groupItem__avatar' src={user.photoURL} />)}
               </AvatarGroup>
             </>
           )} />
       </ListItem>
       <Divider />
-    </>
+    </Link>
   )
 }
 

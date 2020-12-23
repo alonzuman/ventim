@@ -1,15 +1,14 @@
 import { useEffect, useState } from 'react';
-import { db } from '../firebase';
-import useAuth from './useAuth';
+import { auth, db } from '../firebase';
 const Users = db.collection('users');
 
 const useProfile = () => {
-  const { user } = useAuth();
+  const user = auth.currentUser;
   const [error, setError] = useState('');
-  const [profile, setProfile] = useState({});
+  const [profile, setProfile] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
 
-  const createProfile = (user) => {
+  const createProfile = () => {
     const { uid, displayName, photoURL, phoneNumber, email } = user;
 
     Users.doc(uid).set({
@@ -19,11 +18,11 @@ const useProfile = () => {
       email,
       createdAt: Date.now()
     }, { merge: true }).then(() => {
-      fetchProfile(user);
+      fetchProfile();
     })
   }
 
-  const fetchProfile = (user) => {
+  const fetchProfile = () => {
     const { uid } = user;
     setIsLoading(true);
 
@@ -37,7 +36,7 @@ const useProfile = () => {
           setIsLoading(false)
           return setProfile(fetchedUser);
         } else {
-          return createProfile(user);
+          return createProfile();
         }
       })
       .catch(err => {
@@ -48,7 +47,7 @@ const useProfile = () => {
 
   useEffect(() => {
     if (user && !profile) {
-      return fetchProfile(user);
+      return fetchProfile();
     }
   }, [user])
 
