@@ -20,7 +20,7 @@ const ProtectedRouter = () => {
     <BrowserRouter>
       <Header />
       <RedirectToHome />
-      <Box maxWidth={1024} marginRight='auto' marginLeft='auto' padding={2}>
+      <Box maxWidth={1248} marginRight='auto' marginLeft='auto' padding={2}>
         <Switch>
           <ProtectedRoute exact path='/' component={Home} />
           <ProtectedRoute path='/profile' component={Profile} />

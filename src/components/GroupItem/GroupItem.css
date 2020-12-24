@@ -1,13 +1,20 @@
-.groupItem__avatarGroup {
-  margin-top: 8px;
+.groupItem__image {
+  height: 40px!important;
+  width: 40px!important;
 }
 
-.groupItem__avatar {
-  height: 32px!important;
-  width: 32px!important;
+.groupItem__avatarGroup {
+  margin-top: 8px;
 }
 
 .groupItem__link {
   color: inherit;
   text-decoration: inherit;
+}
+
+.groupItem__avatarGroup .MuiAvatar-root {
+  height: 24px!important;
+  width: 24px!important;
+  font-size: 14px!important;
+  font-weight: 600;
 }

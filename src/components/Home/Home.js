@@ -1,35 +1,31 @@
-import { Box, Button, Grid, Typography } from '@material-ui/core'
-import React, { useEffect } from 'react'
+import { Box, Button, makeStyles, Typography } from '@material-ui/core'
+import React from 'react'
 import useAuth from '../../hooks/useAuth'
-import useEvents from '../../hooks/useEvents'
 import useProfile from '../../hooks/useProfile'
+import MyEvents from '../../MyEvents/MyEvents'
 import { seedGroups } from '../../utils/firebase'
-import EventsGrid from '../EventsGrid/EventsGrid'
 import MyGroups from '../MyGroups/MyGroups'
+
+const useStyles = makeStyles({
+  title: {
+    fontSize: 32,
+    fontWeight: 600
+  }
+})
 
 const Home = () => {
   const { signOut } = useAuth();
   const { profile } = useProfile();
-  const { events, fetchMyEvents } = useEvents();
 
-  useEffect(() => {
-    if (events?.all?.length === 0) {
-      fetchMyEvents();
-      console.log(events);
-    }
-  }, [])
-
-  useEffect(() => {
-    console.log(events);
-  }, [events])
+  const classes = useStyles();
 
   return (
     <Box display='flex'>
       <Box flex={6} padding={2}>
-        <Typography variant='h3'>Welcome to Ventim</Typography>
+        <Typography className={classes.title} variant='h1'>Welcome to Ventim</Typography>
         <Button onClick={() => seedGroups(profile)}>Seed groups</Button>
         <Button onClick={signOut}>Sign Out</Button>
-        <EventsGrid events={events?.all} />
+        <MyEvents />
       </Box>
       <Box flex={4} padding={2}>
         <MyGroups />

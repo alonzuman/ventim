@@ -1,18 +1,29 @@
-import { Avatar, Box, Card, CardContent, Typography } from '@material-ui/core';
+import { Avatar, Box, Card, CardContent, makeStyles, Typography } from '@material-ui/core';
 import { AvatarGroup } from '@material-ui/lab';
 import React, { useContext } from 'react'
 import { GroupsContext } from '../../providers/GroupsProvider';
 
-const EventCard = ({ title, description, userIds, date, groupId }) => {
-  const { groups } = useContext(GroupsContext);
-  const group = groups?.all?.find(fetchedGroup => fetchedGroup.id === groupId);
+const useStyles = makeStyles({
+  root: {
+    transition: 'all .15s ease-in-out',
+    cursor: 'pointer',
 
-  console.log(groups)
-  console.log(group);
+    '&:hover': {
+      border: '1px solid #acacac',
+      boxShadow: '0px 4px 10px #00000010'
+    }
+  }
+})
+
+const EventCard = ({ title, description, userIds, date, groupId }) => {
+  const { myGroups } = useContext(GroupsContext);
+  const group = myGroups?.all?.find(fetchedGroup => fetchedGroup.id === groupId);
+
+  const classes = useStyles();
 
   if (group) {
     return (
-      <Card variant='outlined'>
+      <Card variant='outlined' className={classes.root}>
         <CardContent>
           <Typography color='textSecondary'>
             {date}
@@ -29,7 +40,7 @@ const EventCard = ({ title, description, userIds, date, groupId }) => {
             <AvatarGroup max={3}>
               {userIds?.map(userId => {
                 const user = group?.users?.find(groupUser => groupUser.id === userId);
-                return <Avatar src={user?.photoURL} alt={user?.displayName} />
+                return <Avatar key={userId} src={user?.photoURL} alt={user?.displayName} />
               })}
             </AvatarGroup>
           </Box>

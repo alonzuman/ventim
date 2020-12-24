@@ -1,11 +1,10 @@
-import { useContext, useEffect } from 'react'
-import { db } from '../firebase';
+import { useContext } from 'react'
 import { GroupsContext } from '../providers/GroupsProvider';
 
 const useGroups = () => {
-  const { groups, fetchMyGroups, group, isLoading, fetchGroup, fetchGroupEvents } = useContext(GroupsContext)
+  const { group, myGroups, fetchMyGroups, fetchGroup } = useContext(GroupsContext)
 
-  return { groups, group, fetchMyGroups, fetchGroup, isLoading, fetchGroupEvents };
+  return { group, myGroups, fetchMyGroups, fetchGroup };
 }
 
 export default useGroups

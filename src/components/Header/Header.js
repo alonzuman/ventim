@@ -7,7 +7,7 @@ const Header = () => {
 
   return (
     <Box display='flex' justifyContent='space-between' alignItems='center'>
-      <Box padding={1} width='100%' marginRight='auto' marginLeft='auto' maxWidth={1440} display='flex' justifyContent='space-between' alignItems='center'>
+      <Box paddingX={4} paddingY={1} width='100%' marginRight='auto' marginLeft='auto' maxWidth={1440} display='flex' justifyContent='space-between' alignItems='center'>
         <Typography variant='h5'>Ventim</Typography>
         <Avatar src={profile?.photoURL} />
       </Box>
